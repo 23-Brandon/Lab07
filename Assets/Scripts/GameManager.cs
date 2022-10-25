@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text Txt_Message = null;
     private int Score = 0;
 
+
+    private float scoreInterval = 1f;
+    private float nextscore = 2.5f;
+
+    public Text Scoretxt;
+
     void Start()
     {
         thisManager = this;
@@ -20,13 +26,20 @@ public class GameManager : MonoBehaviour
     {
         if (Time.timeScale == 0 && Input.GetKeyDown(KeyCode.Return))
             StartGame();
+
+        if (Time.time >= nextscore)
+        {
+            nextscore = Time.time + scoreInterval;
+            Score++;
+        }
+        Scoretxt.text = "Score: " + Score;
     }
 
-    public void UpdateScore(int value)
-    {
-        Score += value;
-        Txt_Score.text = "SCORE : " + Score;
-    }
+    //public void UpdateScore(int value)
+   // {
+        //Score += value;
+        //Txt_Score.text = "SCORE : " + Score;
+    //}
 
     private void StartGame()
     {
